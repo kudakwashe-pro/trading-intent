@@ -11,8 +11,10 @@ This directory is the minimal paper workspace for TIM.
 ## Current assets
 
 - [Paper Outline](paper-outline.md)
+- [Paper Source](tim-paper.md)
 - [System Diagram](../design/system-diagram.md)
 - [Architecture Reference](../design/architecture.md)
+- Final PDF artifact: `output/pdf/tim-paper.pdf`
 
 ## Writing discipline
 
