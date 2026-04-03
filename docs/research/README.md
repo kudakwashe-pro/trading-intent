@@ -12,6 +12,7 @@ This directory is the minimal paper workspace for TIM, with the English paper no
 
 - [Paper Outline](paper-outline.md)
 - Canonical English paper source: `tim-paper.tex`
+- Canonical Chinese paper source: `tim-paper-zh.tex`
 - Canonical English paper template shape: `main.tex`-style NeurIPS preprint layout
 - Canonical English paper style: `neurips_2021.sty`
 - Local algorithm package: `algorithm.sty`

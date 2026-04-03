@@ -14,3 +14,4 @@ tectonic --outdir "$FIGURE_BUILD_DIR" pipeline-figure.tex
 
 cd "$RESEARCH_DIR"
 tectonic --outdir "$OUTPUT_DIR" tim-paper.tex
+tectonic --outdir "$OUTPUT_DIR" tim-paper-zh.tex
