@@ -2,7 +2,7 @@
 
 ## White Paper
 
-[English PDF: Trade Intent Models: A Semantic Interface for Cross-Market Trading and Agentic Strategy Execution](output/pdf/tim-paper.pdf)
+[Trade Intent Models: A Semantic Interface for Cross-Market Trading and Agentic Strategy Execution](output/pdf/tim-paper.pdf)
 
 **Abstract.** Trading systems remain fragmented by asset class, venue, execution model, and technical stack. A single economic idea may need to be implemented across broker APIs, centralized exchanges, decentralized protocols, options venues, prediction markets, and on-chain transaction flows, each with its own syntax and operational assumptions. This paper argues that trade intent should be treated as a first-class semantic layer for trading systems. A trade intent model is a domain-specific language that compiles ambiguous human requests into a precise, machine-verifiable, execution-agnostic representation of desired economic action. Like semantic parsing in search or CVXPY in optimization, it separates what the user wants from how the system executes it. The central claim is that a well-designed trade intent model creates value through semantic precision, cross-venue interoperability, strategy composability, and agentic automation.
 
