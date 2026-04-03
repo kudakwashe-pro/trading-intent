@@ -45,11 +45,11 @@ Without an intermediate representation, these benefits collapse into black-box a
 
 Execution itself should be layered. The right analogy is robotics: high-level planning is distinct from low-level motor execution. Trading systems should make the same distinction between high-level trade intent and low-level execution tasks or execution policies.
 
-High-level trade intent is the planning layer. It captures the economically meaningful objective in a way that can be derived from natural language without leaving economically relevant ambiguity. It is also the right surface for cross-venue reasoning, liquidity aggregation, and policy-aware routing. A request such as `buy $10 million of AAPL by end of day` or `buy by end of week` should first be represented as a high-level object with explicit notional, time horizon, impact tolerance, urgency, and venue constraints. Only then should it be decomposed into lower-level tasks.
+High-level trade intent is the planning layer. It captures the economically meaningful objective in a way that can be derived from natural language without leaving economically relevant ambiguity. It is also the right surface for cross-venue reasoning, liquidity aggregation, and policy-aware routing. A request such as `buy 100,000 shares of AAPL before the close` or `buy $1 million of NVDA call options this week` should first be represented as a portfolio-level object with explicit notional, time horizon, impact tolerance, urgency, and venue constraints. Only then should it be decomposed into lower-level execution tasks.
 
-Those lower-level tasks belong to an execution layer. Depending on market structure, they may be realized through deterministic execution algorithms such as TWAP and VWAP, through broker-native smart routing, through on-chain naive slicing, through AMM or aggregator-based execution, or through richer venue-specific policies. These are not different user intents. They are different compilations of the same intent into market-specific tasks.
+Those lower-level tasks belong to an execution layer. A single high-level portfolio trade may expand into many child orders, each governed by a different execution policy. Depending on market structure, those tasks may be realized through deterministic execution algorithms such as TWAP and VWAP, through broker-native smart routing, through on-chain naive slicing, through AMM or aggregator-based execution, or through richer low-latency strategies that incorporate market-structure or macro-sensitive execution signals. These are not different user intents. They are different compilations of the same intent into market-specific execution orders.
 
-This separation also creates a principled place for microstructure-level improvement. The same intent can be executed better by blending in low-latency tactics, order-book-aware placement, queue-sensitive routing, microstructure alpha, or on-chain route-selection and timing improvements. The semantic layer is responsible for economic correctness; the execution layer is responsible for realized execution quality.
+This separation also creates a principled place for microstructure-level improvement. The same intent can be executed better by blending in low-latency tactics, order-book-aware placement, queue-sensitive routing, microstructure alpha, or on-chain route-selection and timing improvements. The semantic layer is responsible for economic correctness; the execution layer is responsible for realized execution quality. The user specifies the portfolio objective once at the natural-language level, and the system remains free to search over better low-level implementations without changing that original intent.
 
 ## 5. A System View: From Idea to Agentic Execution
 
@@ -57,9 +57,9 @@ The long-term objective is not a thin brokerage interface. It is an action-descr
 
 1. Idea ingestion. The user supplies a thesis, desired position, hedge objective, or multi-step action request.
 2. Semantic parsing into high-level trade intent. The request is normalized into a canonical, machine-verifiable object that supports cross-venue reasoning and liquidity aggregation.
-3. Strategy synthesis and task decomposition. The system generates candidate implementations and breaks large or time-constrained intents into executable tasks.
+3. Strategy synthesis and task decomposition. The system generates candidate implementations and breaks large or time-constrained portfolio intents into executable tasks and child orders.
 4. Validation and policy checks. The platform checks feasibility, liquidity, risk, permissions, and portfolio consistency.
-5. Low-level execution policy selection. The system chooses concrete execution methods such as TWAP, VWAP, smart routing, AMM-aware splitting, or microstructure-informed enhancement.
+5. Low-level execution policy selection. The system chooses concrete execution methods such as TWAP, VWAP, smart routing, AMM-aware splitting, or low-latency microstructure-informed enhancement.
 6. Execution compilation and deployment. The selected strategy is lowered into venue-specific orders, transactions, or MCP workflows and run on an agent platform.
 
 The trade intent schema is the stable interface across these stages.
