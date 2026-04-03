@@ -4,87 +4,82 @@ Bill Sun
 
 ## Abstract
 
-Most AI trading systems still use the wrong abstraction boundary. A user expresses what they want in natural language, but the system often tries to jump directly from that ambiguous description to executor-specific API calls. The result is brittle tooling, opaque failures, and duplicated integration logic across venues. TIM, the Trading Intent Model, proposes a different decomposition. It treats trading as a compilation pipeline: natural language is translated into an unambiguous intermediate representation, validated against a trade-intent DSL, and then lowered into layered execution policies and venue-specific instructions. The key contribution is not a new trading interface. It is a verifiable trade intent DSL that can describe orders across venues, asset classes, and execution backends while preserving a clean boundary between planning and execution.
+Trading systems remain fragmented by asset class, venue, execution model, and technical stack. A single economic idea may need to be implemented across broker APIs, centralized exchanges, decentralized protocols, options venues, prediction markets, and on-chain transaction flows, each with its own syntax and operational assumptions. This paper argues that trade intent should be treated as a first-class semantic layer for trading systems. A trade intent model is a domain-specific language that compiles ambiguous human requests into a precise, machine-verifiable, execution-agnostic representation of desired economic action. Its role is analogous to semantic parsing in search or modeling languages such as CVXPY in optimization: the user specifies what should be achieved; the system compiles that specification into a canonical representation; downstream components translate that representation into executable instructions. The key extension developed here is hierarchical execution. High-level trade intent defines economic correctness; low-level execution policies determine realized execution quality. This separation makes cross-venue trading more debuggable, composable, and suitable for agent-driven execution.
 
 ## 1. Introduction
 
-The central problem in AI trading infrastructure is ambiguity management. Human users naturally describe trades at a high level: what they want to own, what constraints they care about, which venues they trust, and what combinations of positions they want to assemble. Execution systems, by contrast, require a low-level specification: product identifiers, chain or venue routing, leg structure, price and quantity fields, settlement assumptions, and risk controls. When these two layers are connected directly, the result is a black box. A failed trade may reflect a misunderstanding of the user request, an incorrect intermediate representation, or a bad venue adapter, yet the system offers no principled way to separate these failure modes.
+The core problem is simple: human trading intent is high-level, but execution infrastructure is fragmented and low-level. Users think in terms of outcomes, exposures, hedges, and constraints. Venues expose order types, product identifiers, chain-specific transaction formats, routing rules, and incompatible APIs. Directly mapping one into the other produces brittle systems.
 
-TIM is built around a stronger claim: trading should be treated as compilation. Natural language is the source language. A trade intent is the intermediate representation. Layered execution plans and venue-specific instructions are the target code. This changes the engineering objective. Instead of designing one more trading interface, TIM defines a domain-specific language for trade intent: a precise, verifiable, cross-venue schema that captures what the user wants in a form that machines can validate and downstream systems can compile further.
+This mismatch creates three failures. Natural language is expressive but ambiguous. Execution interfaces are precise but siloed. Automation without a stable intermediate representation is hard to audit and hard to debug. When something goes wrong, it is often unclear whether the system misunderstood the user’s goal, constructed the wrong strategy, or translated the strategy incorrectly into venue-native instructions.
 
-The strongest one-sentence description is therefore the following:
+The proposed compilation pipeline is:
 
-`TIM is not merely a trading interface; it is a compiler that translates natural-language trading intent into an unambiguous, verifiable, and cross-venue executable trade intent DSL.`
+**User idea or natural-language instruction -> High-Level Trade Intent -> Execution Tasks and Policies -> Venue-Specific Orders and Transactions**
 
-This framing shifts the value proposition from convenience to correctness. Every stage of translation becomes inspectable, testable, and debuggable.
+This framing shifts the goal from better order entry to a semantic interface for action.
 
-## 2. From Natural Language to Trade Intent
+Consider the following natural-language request:
 
-The first layer of the system is semantic parsing for trading. This is analogous to how modern search systems map user utterances into structured query representations, or how systems such as CVXPY allow a user to specify optimization problems in a high-level language that is then compiled into a canonical form. In the same spirit, TIM begins with human intent expressed in natural language and compiles it into a formal intermediate representation.
+`Buy $10 of NVDAx on Solana, $5 of PAX Gold on the Ethereum L2 with the best available liquidity between Base and Arbitrum, buy one Yes contract on "Can NVDA exceed $200 in February 2026?", buy one contract on "2 cuts" for "How many times will the Fed cut this year?", and establish an AAPL June 6 190/200 bull call spread through Alpaca via MCP.`
 
-Consider the following trade vector:
+This request is economically coherent but operationally heterogeneous. A trade intent model allows the system to treat it as a single structured trade vector rather than a bag of unrelated API calls.
 
-`buy $10 of NVDAx on SOL, $5 Pax Gold on the best ETH L2 by liquidity, buy one YES contract for "can NVDA pass $200 in Feb 2026", buy one "2 times" contract for "number of Fed cuts this year", and place an AAPL June 6 bull call spread with strikes 190 and 200 on Alpaca`
+## 2. What Is a Trade Intent Model?
 
-This sentence is meaningful to a human, but it is not yet executable. It contains implicit decomposition, venue selection logic, product-family changes, and multiple asset classes. The sentence does not say whether it should be executed atomically, whether the venue-selection rule is resolved at compile time or execution time, or how the options spread should be represented internally. The purpose of the first layer is therefore not execution. It is disambiguation.
+A trade intent model is a formal intermediate representation of desired economic action. It is best understood as a domain-specific language for trading semantics. Its purpose is not merely to record orders, but to express what the user wants in a form that is precise, canonical, execution-agnostic, and machine-operable.
 
-The output of that layer is a trade intent: a formal object that preserves the user’s economic meaning while eliminating linguistic ambiguity. The concrete syntax may be XML, JSON, or an in-memory object. That choice is secondary. The essential property is mathematical precision. A trade intent must be structured, typed, and mechanically checkable.
+The schema should represent economic meaning rather than venue syntax. A useful intent object captures the economic objective, instruments and action types, composition structure, constraints, execution preferences, and provenance across parsing, validation, and lowering. This is what allows similar requests to map to similar structures and allows downstream components to reason about the request algorithmically rather than instruction by instruction.
 
-## 3. Trade Intent as a Domain-Specific Language
+## 3. Why Trade Intent Models Matter
 
-The second layer is the intent language itself. TIM treats trade intent as a domain-specific language for trading. Like a good mathematical language, it must satisfy four requirements.
+Trade intent models create value along four dimensions.
 
-First, it must be unambiguous. A valid intent should mean one thing.
+1. Semantic precision and debuggability. By forcing a translation step from human expression into a canonical schema, the system can detect underspecification, contradictions, or infeasible requests before any trade is placed.
+2. Cross-venue interoperability. Spot, options, perps, prediction contracts, broker flows, and on-chain actions can be represented through one semantic interface even when the final execution backends remain heterogeneous.
+3. Strategy composability. Once a request is represented canonically, multi-leg packages, routing alternatives, cost-risk tradeoffs, and portfolio-level constraints can be reasoned about jointly.
+4. Agent workflow infrastructure. Parsers, validators, simulators, execution planners, monitors, and agents can interoperate through one shared object instead of brittle prompt glue or venue-specific adapters.
 
-Second, it must be verifiable. Required fields, admissible value ranges, disjoint alternatives, and structural invariants must be checkable before execution.
+Without an intermediate representation, these benefits collapse into black-box automation.
 
-Third, it must be compositional. A complex trade vector should decompose into explicit intent objects or structured multi-leg intents rather than disappearing into an opaque executor call.
+## 4. Hierarchical Execution
 
-Fourth, it must be venue-agnostic at the semantic layer. The user’s request should be representable before the system commits to Hyperliquid, Polymarket, Solana, Ethereum, Alpaca, Interactive Brokers, Robinhood, or a prime-broker workflow.
+Execution itself should be layered. The right analogy is robotics: high-level planning is distinct from low-level motor execution. Trading systems should make the same distinction between high-level trade intent and low-level execution tasks or execution policies.
 
-Fifth, it must be execution-aware without collapsing into low-level execution. A high-level intent should be precise enough to support cross-venue routing, liquidity aggregation, and downstream decomposition while still remaining above the level of TWAP schedules, AMM splitting logic, or order-book tactics.
+High-level trade intent is the planning layer. It captures the economically meaningful objective in a way that can be derived from natural language without leaving economically relevant ambiguity. It is also the right surface for cross-venue reasoning, liquidity aggregation, and policy-aware routing. A request such as `buy $10 million of AAPL by end of day` or `buy by end of week` should first be represented as a high-level object with explicit notional, time horizon, impact tolerance, urgency, and venue constraints. Only then should it be decomposed into lower-level tasks.
 
-This is why TIM uses schema-defined intent types. In the current implementation, the schema is the source of truth for structure, validation, templates, and dispatch metadata. The schema does not merely document the system. It defines the language that the system accepts. In that sense, TIM is closer to a compiler front end than to an ordinary API wrapper.
+Those lower-level tasks belong to an execution layer. Depending on market structure, they may be realized through deterministic execution algorithms such as TWAP and VWAP, through broker-native smart routing, through on-chain naive slicing, through AMM or aggregator-based execution, or through richer venue-specific policies. These are not different user intents. They are different compilations of the same intent into market-specific tasks.
 
-## 4. Layered Compilation for Trading
+This separation also creates a principled place for microstructure-level improvement. The same intent can be executed better by blending in low-latency tactics, order-book-aware placement, queue-sensitive routing, microstructure alpha, or on-chain route-selection and timing improvements. The semantic layer is responsible for economic correctness; the execution layer is responsible for realized execution quality.
 
-The full pipeline can be stated in four deterministic layers.
+## 5. A System View: From Idea to Agentic Execution
 
-1. Natural language -> high-level trade intent.
-2. High-level trade intent -> validated trade intent object and execution task graph.
-3. Execution task graph -> venue-specific execution instructions.
-4. Venue-specific execution instructions -> final execution.
+The long-term objective is not a thin brokerage interface. It is an action-description layer and agent workflow substrate in which a user provides an idea, the system synthesizes a strong candidate strategy, validates it, and deploys it with one click.
 
-Each translation increases determinacy. This is the architectural point.
+1. Idea ingestion. The user supplies a thesis, desired position, hedge objective, or multi-step action request.
+2. Semantic parsing into high-level trade intent. The request is normalized into a canonical, machine-verifiable object that supports cross-venue reasoning and liquidity aggregation.
+3. Strategy synthesis and task decomposition. The system generates candidate implementations and breaks large or time-constrained intents into executable tasks.
+4. Validation and policy checks. The platform checks feasibility, liquidity, risk, permissions, and portfolio consistency.
+5. Low-level execution policy selection. The system chooses concrete execution methods such as TWAP, VWAP, smart routing, AMM-aware splitting, or microstructure-informed enhancement.
+6. Execution compilation and deployment. The selected strategy is lowered into venue-specific orders, transactions, or MCP workflows and run on an agent platform.
 
-If a failure occurs, the system no longer reports only that a trade failed. It can localize the failure. The natural-language parser may have misunderstood the request. The intent constructor may have produced an invalid object. The execution planner may have decomposed the high-level objective incorrectly. The execution adapter may have translated the validated intent incorrectly for a particular venue. By separating these stages, TIM turns a black-box failure into a debuggable systems problem.
+The trade intent schema is the stable interface across these stages.
 
-This is also the reason the schema must sit in the middle of the stack. If the intermediate representation is informal, the entire compiler story collapses. If it is precise, then every downstream transformation can be validated against a known contract.
+## 6. Design Principles for a Practical Trade Intent DSL
 
-## 5. High-Level Planning versus Low-Level Execution
+A practical trade intent language should satisfy five requirements.
 
-This layered view is standard in robotics and should be standard in trading. A robot has high-level planning and low-level motor execution. Trading systems have the same structural separation. A user states what position they want, by when, under what constraints, and across which candidate venues. That is a high-level planning problem. How to realize that objective in a particular microstructure is a different problem.
+1. Semantic completeness. It must represent portfolios, conditional logic, dependencies, and nontrivial execution preferences rather than only single-venue orders.
+2. Canonical structure. Superficially different phrasings of the same request should map to closely related forms.
+3. Separation of concerns. The intent layer should capture what the user wants economically; later layers should decide how best to implement it.
+4. Verifiability. Each translation stage should be auditable, with preserved provenance from request to parsed intent to selected strategy to final execution artifacts.
+5. Extensibility. New instruments, venues, chains, and action types should be incorporable without redesigning the entire representation.
 
-The useful high-level object is therefore not an order ticket. It is a high-level trade intent: an unambiguous, cross-venue, liquidity-aware representation of the user objective. Once that object exists, TIM can decompose it into lower-level tasks. Those tasks may then be executed by deterministic execution algorithms such as TWAP or VWAP, by naive on-chain slicing across AMMs, or by richer venue-specific logic that adapts to market state.
+A wrapper translates syntax. A real trade intent model organizes semantics.
 
-Consider the instruction `buy $10 million of AAPL by end of day` or `buy $10 million of AAPL by end of week`. The high-level intent captures the asset, size, time horizon, constraints, and optimization objective. The low-level execution layer then decides how to realize that intent. The system may choose a TWAP schedule, a VWAP schedule, block liquidity sourcing, exchange-specific slicing, or another deterministic execution policy. In on-chain settings, it may decompose the trade into route discovery, AMM splitting, and liquidity-sensitive order placement across venues. These are not different user intents. They are different compilations of the same intent into low-level tasks.
+## 7. Open Problems
 
-This decomposition also creates a principled place for microstructure-level improvement. A base execution algorithm can be blended with low-latency execution logic, order-book microstructure alpha, or other short-horizon tactics that improve implementation quality. In other words, the same high-level intent can admit multiple low-level realizations with different execution quality. That is exactly why the layers must be separated.
-
-## 6. Cross-Venue Unification
-
-The third major claim of TIM is that one intent schema should be able to describe trading across markets, venues, and asset classes. This does not mean every venue becomes identical. It means the semantic layer is unified even when the execution layer remains heterogeneous.
-
-That distinction is crucial. A prediction market contract on Polymarket, a spot swap on Solana, a perpetual trade on Hyperliquid, and a multi-leg options spread on Alpaca should not be forced into the same executor API. They should instead be representable inside the same intent language. Once that language exists, the upper layers of the system can reason uniformly about validation, orchestration, batching, risk checks, and failure attribution.
-
-TIM therefore plays a role analogous to a LEAN-style domain-specific language for trading, but with the additional requirement that the representation be explicitly machine-verifiable and suitable for multi-stage compilation. Users specify what they want. TIM compiles that request into a standardized trade intent representation. Execution planners decompose that representation into tasks. Venue adapters then compile those tasks into concrete execution instructions for the destination system.
-
-## 7. TIM as Implemented
-
-The current TIM repository already reflects this compiler interpretation. Intent schemas live as YAML files. The agent-facing template surface is generated from those schemas. A generic XML parser converts submitted intent payloads into JSON without embedding product-specific logic. A schema validator checks the resulting value for structural correctness. A dispatcher routes the validated intent to an executor according to configured rules such as intent type and chain identifier. Conceptually, the next layer is an execution planner that decomposes high-level intent into venue-specific tasks before final execution.
-
-This design is intentionally narrow. TIM does not attempt to be the execution engine for every market. It acts as the contract layer between planning and execution. New intent types are introduced primarily by adding schema files. New routes are introduced primarily by configuration.
+Several research problems remain open: selecting the right abstraction level for the schema; preserving semantic meaning during lowering; deciding which missing fields can be inferred safely; handling partial fills and cross-venue failure recovery; and constraining agent autonomy through risk, policy, and audit layers. These are not peripheral concerns. They are core design constraints for any deployment-grade trade intent system.
 
 ## 8. Conclusion
 
-The right way to think about TIM is not as a thin trading frontend. It is a compiler boundary for trading systems. Natural language belongs at the top, because that is how humans express goals. Low-level execution policies and venue-specific instructions belong at the bottom, because that is how markets are actually accessed. Between them there must exist a precise intermediate language that removes ambiguity, supports validation, and composes across venues. If AI agents are going to participate in financial execution, the infrastructure must standardize meaning before it standardizes action. Trade intent is that meaning layer.
+Trade intent models provide a semantic interface between human trading ideas and heterogeneous execution infrastructure. They transform ambiguous input into a precise, machine-verifiable, and execution-agnostic representation of economic action. Their value is broader than cleaner order syntax. A well-designed trade intent layer enables cross-venue interoperability, makes multi-leg strategies composable, improves debuggability, and supports a principled separation between high-level economic intent and low-level execution policy. In that sense, the trade intent model should be viewed not as a feature, but as infrastructure: the shared semantic substrate that allows fragmented markets, heterogeneous APIs, and agent platforms to interoperate through one language of economic intent.

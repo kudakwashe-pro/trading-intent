@@ -286,11 +286,11 @@ def build_story():
                 story.append(Paragraph("Abstract", styles["abstract_label"]))
             else:
                 story.append(Paragraph(paragraph_text(value), styles["h2"]))
-                if value.startswith("4. Layered Compilation for Trading"):
+                if value.startswith("5. A System View: From Idea to Agentic Execution"):
                     story.append(compiler_pipeline_figure())
                     story.append(
                         Paragraph(
-                            "Figure 1. TIM separates high-level trade intent from low-level execution decomposition, so semantics and execution policy can evolve independently.",
+                            "Figure 1. TIM acts as the stable representation layer from idea ingestion to execution-policy selection and venue-native deployment.",
                             styles["caption"],
                         )
                     )
