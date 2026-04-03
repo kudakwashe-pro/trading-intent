@@ -1,6 +1,6 @@
 # Research Workspace
 
-This directory is the minimal paper workspace for TIM.
+This directory is the minimal paper workspace for TIM, with the English paper now anchored to a NeurIPS-style LaTeX source.
 
 ## Purpose
 
@@ -11,10 +11,17 @@ This directory is the minimal paper workspace for TIM.
 ## Current assets
 
 - [Paper Outline](paper-outline.md)
-- [Paper Source](tim-paper.md)
+- Canonical English paper source: `tim-paper.tex`
+- Canonical English paper template shape: `main.tex`-style NeurIPS preprint layout
+- Canonical English paper style: `neurips_2021.sty`
+- Local algorithm package: `algorithm.sty`
+- Shared math definitions: `defs.tex`
+- Working prose draft: [tim-paper.md](tim-paper.md)
+- Chinese companion draft: [tim-paper.zh.md](tim-paper.zh.md)
 - [System Diagram](../design/system-diagram.md)
 - [Architecture Reference](../design/architecture.md)
 - Final PDF artifact: `output/pdf/tim-paper.pdf`
+- Build command: `docs/research/build_paper.sh`
 
 ## Writing discipline
 
