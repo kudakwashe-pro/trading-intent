@@ -16,6 +16,17 @@ AI Agent ──XML──▶│ parse → validate(schema) → dispatch  │─�
 Agent ◀──────────│ GET /templates ← schema-generated     │
                   └────────────────────────────────────┘
 ```
+## Example query of human vibe trading input:
+
+Example of human precise, heterogeneous, multi-venue input for vibe trading:
+
+"Buy $10 of NVDAx on Solana, $5 of PAX Gold on the Ethereum L2 with the best available
+liquidity between Base and Arbitrum, buy one Yes contract on “Can NVDA exceed $200 in
+February 2026?”, buy one contract on “2 cuts” for “How many times will the Fed cut this
+year?”, and establish an AAPL June 6 190/200 bull call spread through Alpaca via MCP."
+
+Example of Event-conditional order from human vibe trading:
+"When @coinbasemarkets posts on X, that some coin is going to list on Coinbase,  1)buy into this coin 2) Go to polymarket and find the bet related to this coin, and buy into the contract that this coin price will go up."
 
 ## Why TIM?
 
@@ -89,6 +100,7 @@ Schemas live in `intents/` as YAML files. Each schema defines:
 | `CONDITIONAL_ENTRY` | Register a rule that triggers a trade on an event | `event_trigger` (news, listings, social), buy/sell action, `criteria` |
 
 All intent types support optional `callback_url` for executor-to-agent notifications and optional `exit` strategies (take-profit / stop-loss).
+
 
 ### Schema Example
 
